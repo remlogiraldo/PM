@@ -1,0 +1,69 @@
+{% extends 'home/pages/base.html' %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- basic form  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Crear Usuario</h3>
+        </div>
+        <div class="card">
+            {% if error %}
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>ERROR! </strong> {{error}}
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <form action="{% url 'crear_usuario_accion' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-form-label">Nombre de usuario</label>
+                        <input id="username" name="username" type="text" placeholder="nombre.apellido" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Nombre</label>
+                        <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Apellido</label>
+                        <input id="lastN" name="lastN" type="text" placeholder="Apellido" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Correo Electrónico</label>
+                        <input id="email" name="email" type="email" placeholder="name@example.com" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Contraseña</label>
+                        <input id="password" name="password" type="password" placeholder="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_cargo" class="col-form-label">Cargo: {{usuario.tipo_cargo}}</label>
+                        <select class="form-control" id="tipo_cargo" name="tipo_cargo" >
+                            <option id="PREVENTA">Ingeniero Preventa</option>
+                            <option id="COORDINADOR_PREVENTA">Coordinador Preventa</option>
+                            <option id="OPERADOR_SET">Operador SET</option>
+                            <option id="OPERADOR_GTI">Operador GTI</option>
+                            <option id="ING_CLOUD">Arquitecto Cloud</option>
+                            <option id="ING_ESPECIALISTA">Ingeniero Especialista</option>
+                            <option id="AGENTE">Agente de mesa</option>
+                            <option id="GERENTE">Gerente de proyecto</option>
+                            <option id="CONTADOR">Contador</option>
+                            <option id="ANALISTA">Analista ITIL</option>
+                            <option id="ING_IMP">Ingeniero implementacion</option>
+                            <option id="LIDER_IMP">Lider de implementacion</option>
+                            <option id="LIDER_NOC">Lider NOC</option>
+                            <option id="LIDER_SOC">Lider SOC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary" type="submit">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

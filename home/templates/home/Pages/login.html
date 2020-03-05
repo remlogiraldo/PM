@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link href="{% static 'assets/vendor/fonts/circular-std/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/libs/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/fonts/fontawesome/css/fontawesome-all.css' %}">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- login page  -->
+    <!-- ============================================================== -->
+    <div class="splash-container">
+        <div class="card ">
+            <div class="card-header text-center"><a href="http://www.aurs.com.co"><img class="logo-img"
+                        src="{% static '/assets/images/arus.png'%}" height="103" width="292" alt="logo"></a><span
+                    class="splash-description">GESTIÓN DE PROYECTOS</span></div>
+            <div class="card-body">
+                <form action="{% url 'hacer_login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control form-control-lg" id="username" name="username" type="text"
+                            placeholder="Username" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control-lg" id="password" name="password" type="password"
+                            placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                </form>
+            </div>
+            <div class="card-footer bg-white p-0  ">
+                <div class="card-footer-item card-footer-item-bordered">
+                    <a href="#" class="footer-link" data-toggle="modal" data-target="#forgot_pass">¿Olvidó su contraseña?</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="forgot_pass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgot_pass">Recuperación de contraseña</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <h7>Para recuperar su contraseña contacte al administrador del sistema:</h7>
+                    <h7>admingparus@arus.com.co</h7>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'logout' %}" class="btn btn-primary">Aceptar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end login page  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script src="{% static '/assets/vendor/jquery/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.js'%}"></script>
+</body>
+
+</html>

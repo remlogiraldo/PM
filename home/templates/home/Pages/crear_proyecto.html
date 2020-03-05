@@ -1,0 +1,145 @@
+{% extends 'home/pages/base.html' %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- basic form  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Crear Proyecto</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'crear_proyecto_accion' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input id="nombre" name="nombre" type="text" placeholder="Nombre de proyecto"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"
+                            placeholder="Breve descripcion del proyecto" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantes" class="col-form-label">Participantes (seleccione los participantes que deseea agregar)</label>
+                        <select class="form-control" id="participantes" name="participantes" multiple>
+                            {% for participantes in usuarios.all %}
+                            <option value="{{participantes.usuario.id}}">
+                                {{participantes.usuario.first_name}}
+                                {{participantes.usuario.last_name}} {{ participantes.cargo }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_proy" class="col-form-label">Línea</label>
+                        <select class="form-control" id="tipo_proy" name="tipo_proy">
+                            <option id="GTI">GTI</option>
+                            <option id="SET">SET</option>
+                            <option id="CLOUD">CLOUD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_kick" class="col-form-label">Fecha KickOff</label>
+                        <input id="fecha_kick" name="fecha_kick" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_inicio class=" col-form-label">Fecha Inicio</label>
+                        <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="costo_mensual" class="col-form-label">Costo mensual</label>
+                        <input id="costo_mensual" name="costo_mensual" type="number"
+                            placeholder="Número sin punto ni coma" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="margen" class="col-form-label">Margen</label>
+                        <input id="margen" name="margen" type="number" placeholder="Número sin punto ni coma"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ans" class="col-form-label">Disponibilidad según ANS</label>
+                        <select class="form-control" id="ans" name="ans">
+                            <option id="95">95</option>
+                            <option id="97">97</option>
+                            <option id="99">99</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="moneda" class="col-form-label">Moneda</label>
+                        <select class="form-control" id="moneda" name="moneda">
+                            <option id="COP">COP</option>
+                            <option id="USD">USD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="trm" class="col-form-label">TRM</label>
+                        <input id="trm" name="trm" type="number" placeholder="Número sin punto ni coma"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="costo_implementacion" class="col-form-label">Costo de
+                            implementación</label>
+                        <input id="costo_implementacion" name="costo_implementacion" type="number"
+                            placeholder="Número sin punto ni coma" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="incremento" class="col-form-label">Incremento anual</label>
+                        <select class="form-control" id="incremento" name="incremento">
+                            <option id="IPC">IPC</option>
+                            <option id="SMLV">SMLV</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="costo_imp_diferido" class="col-form-label">¿Costos de implementación
+                            diferidos?</label>
+                        <select class="form-control" id="costo_imp_diferido" name="costo_imp_diferido">
+                            <option id="SI">Si</option>
+                            <option id="NO">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="facturacion" class="col-form-label">Facturacion</label>
+                        <select class="form-control" id="facturacion" name="facturacion">
+                            <option id="MES_VENCIDO">Mes vencido</option>
+                            <option id="MES_CORRIENTE">Mes corriente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="penal" class="col-form-label">Porcentaje de penalización sobre
+                            factura
+                            mensual</label>
+                        <input id="penal" name="penal" type="number" placeholder="2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="duracion_total" class="col-form-label">Tiempo duración del
+                            contrato</label>
+                        <input id="duracion_total" name="duracion_total" type="number" placeholder="Número de meses"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="duracion_implementacion" class="col-form-label">Tiempo de
+                            implementación</label>
+                        <input id="duracion_implementacion" name="duracion_implementacion" type="number"
+                            placeholder="Número de meses" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cotizador" class="col-form-label">Cotizador</label>
+                        <input id="cotizador" name="cotizador" type="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="documento" class="col-form-label">Documento</label>
+                        <input id="documento" name="documento" type="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary" type="submit">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

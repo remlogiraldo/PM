@@ -1,0 +1,252 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>{% block title %} ARUS Gestión de Proyectos  {% endblock %}</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link href="{% static 'assets/vendor/fonts/circular-std/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/libs/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/fonts/fontawesome/css/fontawesome-all.css' %}">
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div class="dashboard-header">
+            {% if user.is_authenticated %}
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" href="{% url 'index' %}">Gestión de proyectos</a>
+                <a href="http://www.arus.com.co"> <img src="{% static 'assets/images/arus.png' %}" class="navbar-nav"
+                        height="70" width="210"> </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" type="text" placeholder="Search..">
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown notification">
+                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
+                                    class="indicator"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
+                                <li>
+                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown connection">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
+                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li>
+                                    <div class="conntection-footer"><a href="#">More</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    src="{% static 'assets/images/avatar-1.jpg' %}" alt=""
+                                    class="user-avatar-md rounded-circle"></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                                aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name">{{user.first_name}} {{user.last_name}}
+                                    </h5>
+                                    <span class="status"></span><span class="ml-2">{{user.username}}</span>
+                                </div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal"><i
+                                        class="fas fa-power-off mr-2"></i>Salir</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </li>
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+        </nav>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Salir</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <p>¿Esta seguro que desea salir del sistema?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                    <a href="{% url 'logout' %}" class="btn btn-primary">Aceptar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-divider">
+                            Menu Administrador 
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fab fa-fw fa-wpforms"></i>Proyectos <span
+                                    class="badge badge-success">6</span></a>
+                            <div id="submenu-1" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'crear_proyecto' %}">Crear proyecto</a>
+                                        <a class="nav-link" href="{% url 'visualizar_proyectos' %}">Listar
+                                            proyectos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                data-target="#submenu-2" aria-controls="submenu-2"><i
+                                    class="fa fa-fw fa-user-circle"></i>Usuarios <span
+                                    class="badge badge-success">6</span></a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'crear_usuario' %}">Crear Usuario</a>
+                                        <a class="nav-link" href="{% url 'visualizar_usuarios' %}">Listar Usuarios</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </li>
+                </ul>
+        </div>
+        </nav>
+    </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+            <div class="row">
+                <div class="col-xl-10">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- end pageheader  -->
+                    <!-- ============================================================== -->
+                    {% block content %}
+                    {% endblock %}
+                    <!-- ============================================================== -->
+                    <!-- footer  -->
+                    <!-- ============================================================== -->
+                    <div class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    Copyright © 2020. Todos los derechos reservados. Dashboard by <a
+                                        href="https://colorlib.com/wp/">Colorlib</a>.
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="text-md-right footer-links d-none d-sm-block">
+                                        <a href="javascript: void(0);">Acerca</a>
+                                        <a href="javascript: void(0);">Soporte</a>
+                                        <a href="javascript: void(0);">Contactenos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end footer -->
+                    <!-- ============================================================== -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end main wrapper -->
+            <!-- ============================================================== -->
+            <!-- Optional JavaScript -->
+            <!-- Optional JavaScript -->
+            <script src="{% static 'assets/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+            <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+            <script src="{% static 'assets/vendor/slimscroll/jquery.slimscroll.js' %}"></script>
+            <script src="{% static 'assets/libs/js/main-js.js' %}"></script>
+            <script>
+                $(function (e) {
+                    "use strict";
+                    $(".date-inputmask").inputmask("dd/mm/yyyy"),
+                        $(".phone-inputmask").inputmask("(999) 999-9999"),
+                        $(".international-inputmask").inputmask("+9(999)999-9999"),
+                        $(".xphone-inputmask").inputmask("(999) 999-9999 / x999999"),
+                        $(".purchase-inputmask").inputmask("aaaa 9999-****"),
+                        $(".cc-inputmask").inputmask("9999 9999 9999 9999"),
+                        $(".ssn-inputmask").inputmask("999-99-9999"),
+                        $(".isbn-inputmask").inputmask("999-99-999-9999-9"),
+                        $(".currency-inputmask").inputmask("$9999"),
+                        $(".percentage-inputmask").inputmask("99%"),
+                        $(".decimal-inputmask").inputmask({
+                            alias: "decimal",
+                            radixPoint: "."
+                        }),
+
+                        $(".email-inputmask").inputmask({
+                            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[*{2,6}][*{1,2}].*{1,}[.*{2,6}][.*{1,2}]",
+                            greedy: !1,
+                            onBeforePaste: function (n, a) {
+                                return (e = e.toLowerCase()).replace("mailto:", "")
+                            },
+                            definitions: {
+                                "*": {
+                                    validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~/-]",
+                                    cardinality: 1,
+                                    casing: "lower"
+                                }
+                            }
+                        })
+                });
+            </script>
+</body>
+
+</html>

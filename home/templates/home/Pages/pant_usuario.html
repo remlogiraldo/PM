@@ -1,0 +1,108 @@
+{% extends 'home/pages/base_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- content -->
+<!-- ============================================================== -->
+<div class="row">
+    <!-- ============================================================== -->
+    <!-- profile -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+        <!-- ============================================================== -->
+        <!-- card profile -->
+        <!-- ============================================================== -->
+        <div class="card">
+            <div class="card-body">
+                <div class="user-avatar text-center d-block">
+                    <img src="{% static 'assets/images/avatar-1.jpg' %}" alt="User Avatar"
+                        class="rounded-circle user-avatar-xxl">
+                </div>
+                <div class="text-center">
+                    <h2 class="font-24 mb-0">{{user.first_name}} {{user.last_name}}</h2>
+                    <p>{{user.usuario.tipo_cargo}}</p>
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <h3 class="font-16">Informacion de contacto</h3>
+                <div class="">
+                    <ul class="list-unstyled mb-6">
+                        <li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>{{user.email}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end card profile -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end profile -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- campaign data -->
+    <!-- ============================================================== -->
+    <div class="col-xl-9 col-lg-9 col-md-7 col-sm-12 col-12">
+        <!-- ============================================================== -->
+        <!-- campaign tab one -->
+        <!-- ============================================================== -->
+        <div class="influence-profile-content pills-regular">
+            <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel"
+                    aria-labelledby="pills-campaign-tab">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="section-block">
+                                <h3 class="section-title">Mis proyectos</h3>
+                            </div>
+                        </div>
+                        <div class="col-xl-15 col-lg-15 col-md-16 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered first">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Descripción</th>
+                                                    <th>Detalle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for proyecto in proyectos %}
+                                                <tr>
+                                                    <td>{{ proyecto.nombre_proyecto }}</td>
+                                                    <td>{{ proyecto.descripcion }}</td>
+                                                    <td>
+                                                        <a href="{% url 'proyectos_user' proyecto.id %}"
+                                                            class="btn btn-primary btn-xs"><i
+                                                                class="fas fa-search"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end campaign tab one -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- end campaign data -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end content -->
+<!-- ============================================================== -->
+</div>
+{% endblock %}
