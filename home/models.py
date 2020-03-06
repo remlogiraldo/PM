@@ -126,3 +126,21 @@ class Proyecto(models.Model):
         app_label = 'home'
 
 
+class Tarea(models.Model):
+    nombre_tarea = models.CharField(null=False, max_length=50)
+    descripcion_tarea = models.CharField(null=False, max_length=100)
+    estado = models.BooleanField(null=True)  
+    proyecto = models.ForeignKey(Proyecto,
+                 related_name='tarea_proyecto',
+                 on_delete=models.CASCADE,
+                 null=False)
+    usuario = models.ForeignKey(Usuario,
+                 related_name='tarea_usuario',
+                 on_delete=models.CASCADE,
+                 null=False)
+
+    def __str__(self):
+        return self.nombre_tarea
+
+    class Meta:
+        app_label = 'home'

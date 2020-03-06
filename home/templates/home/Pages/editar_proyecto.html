@@ -11,7 +11,8 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="{% url 'editar_proyecto_accion' proyecto.id%}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'editar_proyecto_accion' proyecto.id%}" method="POST"
+                    enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nombre" class="col-form-label">Nombre</label>
@@ -20,24 +21,32 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
-                        <textarea class="form-control" id="descripcion" placeholder="{{proyecto.descripcion}}" value="{{proyecto.descripcion}}"
-                            name="descripcion" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcion" placeholder="{{proyecto.descripcion}}"
+                            value="{{proyecto.descripcion}}" name="descripcion" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <ul class="list-unstyled arrow">
-                            <p>Participantes actuales</p>
+                            <h7>Participantes actuales</h7>
+                            <br>
+                            <h7>----ID----/----Nombre----/----Cargo----</h7>
+                            </br>
                             {% for participantes in proyecto.participantes.all %}
-                            <li> {{participantes.usuario.first_name}} {{participantes.usuario.last_name}}
-                                 / {{participantes.usuario.usuario.tipo_cargo}} </li>
+                            <li> {{participantes.usuario.id}} / {{participantes.usuario.first_name}}
+                                {{participantes.usuario.last_name}}
+                                / {{participantes.tipo_cargo}} </li>
                             {% endfor %}
                     </div>
                     <div class="form-group">
-                        <label for="participantes" class="col-form-label">Participantes (seleccione los participantes que deseea agregar)</label>
+                        <label for="participantes" class="col-form-label">Participantes (seleccione los participantes
+                            que deseea agregar)</label>
+                        <br>
+                        <h7>----ID----/----Nombre----/----Cargo----</h7>
+                        </br>
                         <select class="form-control" id="participantes" name="participantes" multiple>
                             {% for usuarios in usuarios.all %}
                             <option value="{{usuarios.usuario.id}}">
-                                {{usuarios.usuario.first_name}}
-                                {{usuarios.usuario.last_name}} {{usuarios.usuario.cargo}}
+                                {{usuarios.usuario.id}} / {{usuarios.usuario.first_name}}
+                                {{usuarios.usuario.last_name}} / {{usuarios.tipo_cargo}}
                             </option>
                             {% endfor %}
                         </select>
@@ -52,25 +61,27 @@
                     </div>
                     <div class="form-group">
                         <label for="fecha_kick" class="col-form-label">Fecha KickOff: </label>
-                        <input id="fecha_kick" name="fecha_kick" type="date" class="form-control" value="{{proyecto.fecha_kick|date:'Y-m-d'}}">
+                        <input id="fecha_kick" name="fecha_kick" type="date" class="form-control"
+                            value="{{proyecto.fecha_kick|date:'Y-m-d'}}">
                     </div>
                     <div class="form-group">
                         <label for="fecha_inicio class=" col-form-label">Fecha Inicio: </label>
-                        <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control"  value="{{proyecto.fecha_inicio|date:'Y-m-d'}}">
+                        <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control"
+                            value="{{proyecto.fecha_inicio|date:'Y-m-d'}}">
                     </div>
                     <div class="form-group">
                         <label for="costo_mensual" class="col-form-label">Costo mensual</label>
                         <input id="costo_mensual" name="costo_mensual" type="number"
                             placeholder="{{proyecto.costo_mensual}}" class="form-control" value="{{proyecto.costo_mensual}}>
                     </div>
-                    <div class="form-group">
+                    <div class=" form-group">
                         <label for="margen" class="col-form-label">Margen</label>
-                        <input id="margen" name="margen" type="number" placeholder="{{proyecto.margen}}" value="{{proyecto.margen}}"
-                            class="form-control">
+                        <input id="margen" name="margen" type="number" placeholder="{{proyecto.margen}}"
+                            value="{{proyecto.margen}}" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="ans" class="col-form-label">Disponibilidad según ANS</label>
-                        <select class="form-control" id="ans" name="ans" value="{{proyecto.ans}}" >
+                        <select class="form-control" id="ans" name="ans" value="{{proyecto.ans}}">
                             <option id="95">95</option>
                             <option id="97">97</option>
                             <option id="99">99</option>
@@ -92,7 +103,8 @@
                         <label for="costo_implementacion" class="col-form-label">Costo de
                             implementación</label>
                         <input id="costo_implementacion" name="costo_implementacion" type="number"
-                            placeholder="{{proyecto.costo_implementacion}}" value="{{proyecto.costo_implementacion}}" class="form-control">
+                            placeholder="{{proyecto.costo_implementacion}}" value="{{proyecto.costo_implementacion}}"
+                            class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="incremento" class="col-form-label">Incremento anual</label>
@@ -104,14 +116,16 @@
                     <div class="form-group">
                         <label for="costo_imp_diferido" class="col-form-label">¿Costos de implementación
                             diferidos?</label>
-                        <select class="form-control" id="costo_imp_diferido" name="costo_imp_diferido" value="{{proyecto.costo_imp_diferido}}">
+                        <select class="form-control" id="costo_imp_diferido" name="costo_imp_diferido"
+                            value="{{proyecto.costo_imp_diferido}}">
                             <option id="SI">Si</option>
                             <option id="NO">No</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="facturacion" class="col-form-label">Facturacion</label>
-                        <select class="form-control" id="facturacion" name="facturacion" value="{{proyecto.facturacion}}">
+                        <select class="form-control" id="facturacion" name="facturacion"
+                            value="{{proyecto.facturacion}}">
                             <option id="MES_VENCIDO">Mes vencido</option>
                             <option id="MES_CORRIENTE">Mes corriente</option>
                         </select>
@@ -120,27 +134,33 @@
                         <label for="penal" class="col-form-label">Porcentaje de penalización sobre
                             factura
                             mensual</label>
-                        <input id="penal" name="penal" type="number" placeholder="{{proyecto.penal}}" value="{{proyecto.penal}}" class="form-control">
+                        <input id="penal" name="penal" type="number" placeholder="{{proyecto.penal}}"
+                            value="{{proyecto.penal}}" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="duracion_total" class="col-form-label">Tiempo duración del
                             contrato</label>
-                        <input id="duracion_total" name="duracion_total" value="{{proyecto.duracion_total}}"type="number" placeholder="{{proyecto.duracion_total}}"
-                            class="form-control">
+                        <input id="duracion_total" name="duracion_total" value="{{proyecto.duracion_total}}"
+                            type="number" placeholder="{{proyecto.duracion_total}}" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="duracion_implementacion" class="col-form-label">Tiempo de
                             implementación</label>
                         <input id="duracion_implementacion" name="duracion_implementacion" type="number"
-                            placeholder="{{proyecto.duracion_implementacion}}" class="form-control" value="{{proyecto.duracion_implementacion}}">
+                            placeholder="{{proyecto.duracion_implementacion}}" class="form-control"
+                            value="{{proyecto.duracion_implementacion}}">
                     </div>
                     <div class="form-group">
-                        <label for="cotizador" class="col-form-label">Cotizador:<a href="{{ proyecto.cotizador.url }}" download>{{proyecto.cotizador.name}}</a></label>
-                        <input id="cotizador" name="cotizador" type="file" class="form-control" value="{{proyecto.cotizador}}">
+                        <label for="cotizador" class="col-form-label">Cotizador:<a href="{{ proyecto.cotizador.url }}"
+                                download>{{proyecto.cotizador.name}}</a></label>
+                        <input id="cotizador" name="cotizador" type="file" class="form-control"
+                            value="{{proyecto.cotizador}}">
                     </div>
                     <div class="form-group">
-                        <label for="documento" class="col-form-label">Documento:<a href="{{ proyecto.documento.url }}" download>{{proyecto.documento.name}}</a></label>
-                        <input id="documento" name="documento" type="file" class="form-control" value="{{proyecto.documento}}">
+                        <label for="documento" class="col-form-label">Documento:<a href="{{ proyecto.documento.url }}"
+                                download>{{proyecto.documento.name}}</a></label>
+                        <input id="documento" name="documento" type="file" class="form-control"
+                            value="{{proyecto.documento}}">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-block btn-primary" type="submit">Editar</button>

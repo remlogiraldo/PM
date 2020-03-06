@@ -24,12 +24,17 @@
                             placeholder="Breve descripcion del proyecto" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="participantes" class="col-form-label">Participantes (seleccione los participantes que deseea agregar)</label>
+                        <label for="participantes" class="col-form-label">Participantes (seleccione los participantes
+                            que deseea agregar)</label>
+                        <br>
+                        <h7>----ID----/----Nombre----/----Cargo----</h7>
+                        </br>
                         <select class="form-control" id="participantes" name="participantes" multiple>
                             {% for participantes in usuarios.all %}
                             <option value="{{participantes.usuario.id}}">
+                                {{participantes.usuario.id}} /
                                 {{participantes.usuario.first_name}}
-                                {{participantes.usuario.last_name}} {{ participantes.cargo }}
+                                {{participantes.usuario.last_name}} / {{ participantes.tipo_cargo }}
                             </option>
                             {% endfor %}
                         </select>

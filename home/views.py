@@ -2,7 +2,7 @@ from django.shortcuts import render
 import openpyxl 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Usuario, Proyecto
+from .models import Usuario, Proyecto, Tarea
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -79,9 +79,11 @@ def cambiar_pass(request):
 def cambiar_pass_accion(request):
     password = request.POST['password']
 
-    user = User.objects.filter(username=request.user)
+    current_user=request.user.id
+    user = User.objects.filter(id=current_user)
 
-    user.set_password(password)
+    user.password=password
+    user.password.set()
     return render(request, 'home/Pages/pant_usuario.html')
 
 #Admin views
@@ -194,9 +196,7 @@ def crear_proyecto_accion(request):
     valor_costo_mensual = request.POST['costo_mensual']
     valor_cotizador = request.FILES['cotizador']
     valor_documento = request.FILES['documento'] 
-    valor_participantes = request.POST['participantes']   
-
-    users = Usuario.objects.filter(usuario=valor_participantes)
+    valor_participantes = request.POST.getlist('participantes')   
 
     instance = Proyecto.objects.create(nombre_proyecto=valor_nombre,descripcion=valor_descripcion,
     tipo_proy=valor_tipo_proy, fecha_kick=valor_fecha_kick,
@@ -205,7 +205,13 @@ def crear_proyecto_accion(request):
     facturacion=valor_facturacion, penal=valor_penal, duracion_total=valor_duracion_total,
     duracion_implementacion=valor_duracion_implementacion, costo_mensual=valor_costo_mensual, 
     cotizador=valor_cotizador, documento=valor_documento)
-    instance.participantes.add(*users)
+    
+    for c in valor_participantes:
+        #print(c)
+        
+        users = Usuario.objects.filter(usuario=c)
+        instance.participantes.add(*users)
+    
 
     # Redirecciona a la pagina de talleres
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
@@ -239,10 +245,10 @@ def editar_proyecto_accion(request,id):
     valor_duracion_total = request.POST['duracion_total']
     valor_duracion_implementacion = request.POST['duracion_implementacion']
     valor_costo_mensual = request.POST['costo_mensual']
-    valor_participantes = request.POST['participantes']
+    valor_participantes = request.POST.getlist('participantes')
 
     proyecto = Proyecto.objects.get(pk=id)
-    users = Usuario.objects.filter(usuario=valor_participantes)
+    #users = Usuario.objects.filter(usuario=valor_participantes)
  
     proyecto.nombre_proyecto=valor_nombre
     proyecto.descripcion=valor_descripcion
@@ -268,15 +274,11 @@ def editar_proyecto_accion(request,id):
         valor_documento = request.FILES['documento']
         proyecto.documento=valor_documento
 
-    #proyecto.objects.create(nombre_proyecto=valor_nombre,descripcion=valor_descripcion,
-    #tipo_proy=valor_tipo_proy, fecha_kick=valor_fecha_kick,
-    #fecha_inicio=valor_fecha_inicio, moneda=valor_moneda, trm = valor_trm, costo_implementacion= valor_costo_implementacion,
-    #margen=valor_margen, ans=valor_ans, incremento=valor_incremento, costo_imp_diferido=valor_costo_imp_diferido,
-    #facturacion=valor_facturacion, penal=valor_penal, duracion_total=valor_duracion_total,
-    #duracion_implementacion=valor_duracion_implementacion, costo_mensual=valor_costo_mensual)
-    proyecto.participantes.set(users)
-
-    #Proyecto.objects.filter(pk=id).update(participantes=valor_participantes)
+    proyecto.participantes.clear()
+    for c in valor_participantes:
+        
+        users = Usuario.objects.filter(usuario=c)
+        proyecto.participantes.add(*users)
 
     proyecto.save()
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
