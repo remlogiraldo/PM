@@ -1,0 +1,69 @@
+{% extends 'home/pages/base_user.html' %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Tarea: {{ tarea.nombre_tarea }} </h2>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'act_tarea_accion' tarea.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Descripción: {{ tarea.descripcion_tarea }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Cambiar estado</label>
+                        <select class="form-control" id="estado" name="estado" value="{{tarea.estado}}">
+                            {% if tarea.estado == 'En proceso' %}
+                            <option value="En proceso" selected=''>En proceso</option>
+                            {% else %}
+                            <option value="En proceso" selected=''>En proceso</option>
+                            {% endif %}
+                            {% if tarea.estado == 'Finalizada' %}
+                            <option value="Finalizada" selected=''>Finalizada</option>
+                            {% else %}
+                            <option value="Finalizada" selected=''>Finalizada</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5></h5>  
+                        {% if var == 'true' %}
+                        <label for="cotizador" class="col-form-label">Archivo cargado:<a href="{{ tarea.archivo.url }}"
+                                download>{{tarea.archivo.name}} <i
+                                class="fas fa-download"></i> </a></label>
+                        {% else %}
+                        <label>Aún no ha adjuntado archivo</label>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="archivo" class="col-form-label">Adjuntar archivo:</label>
+                        <input id="archivo" name="archivo" type="file" class="form-control" value="{{tarea.archivo}}">
+                    </div>
+                    <button class="btn btn-block btn-primary" type="submit">Actualizar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+
+<div class="row">
+
+</div>
+{% endblock %}

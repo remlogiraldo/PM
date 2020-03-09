@@ -1,0 +1,49 @@
+{% extends 'home/pages/base.html' %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- basic form  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Crear Tarea para proyecto: {{proyecto.nombre_proyecto}}</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'crear_tarea_accion' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input id="nombre_tarea" name="nombre_tarea" type="text" placeholder="Nombre de tarea" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea class="form-control" id="descripcion_tarea" name="descripcion_tarea"
+                            placeholder="Breve descripcion de la tarea" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_proy" class="col-form-label">Participante</label>
+                        <select class="form-control" id="usuario" name="usuario" value="{{proyecto.tipo_proy}}">
+                            {% for participantes in proyecto.participantes.all %}
+                            <option value="{{participantes.id}}">
+                                {{participantes.id}} /
+                                {{participantes.usuario.first_name}}
+                                {{participantes.usuario.last_name}} / {{ participantes.tipo_cargo }}
+                            </option>
+                            {% endfor %}    
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="proyecto" name="proyecto" value="{{proyecto.id}}">
+                        <input type="hidden" id="estado" name="estado" value="False">
+                    </div>
+                    <div class="form-group">    
+                        <button class="btn btn-block btn-primary" type="submit">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

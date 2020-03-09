@@ -25,12 +25,17 @@ urlpatterns = [
     path('admin/editar_proyecto_accion/<int:id>/editar/?', views.editar_proyecto_accion, name='editar_proyecto_accion'),
     path('admin/visualizar_proyectos/',views.visualizar_proyectos, name='visualizar_proyectos'),
     path('admin/visualizar_proyectos/<int:id>/',views.proyecto, name='proyecto'),
+    path('admin/crear_tarea/<int:id>/', views.crear_tarea, name='crear_tarea'),
+    path('admin/crear_tarea_accion/', views.crear_tarea_accion, name='crear_tarea_accion'),
+
 
     #interfaz usuarios
     path('usuario/pant_usuario/',views.pant_usuario, name='pant_usuario'),
     path('usuario/visualizar_proyectos_user/<int:id>/',views.proyectos_user, name='proyectos_user'),
     path('usuario/cambiar_pass/',views.cambiar_pass, name='cambiar_pass'),
     path('usuario/cambiar_pass_accion/',views.cambiar_pass_accion, name='cambiar_pass_accion'),
+    path('usuario/actualizar_tareas_user/<int:id>/',views.actualizar_tareas_user, name='actualizar_tareas_user'),
+    path('usuario/act_tarea_accion/<int:id>/act/?',views.act_tarea_accion, name='act_tarea_accion'),
 
 
     path('prueba/', views.prueba, name='prueba'),
