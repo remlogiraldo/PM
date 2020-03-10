@@ -1,0 +1,72 @@
+{% extends 'home/pages/base.html' %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- basic form  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Tarea de proyecto: {{proyecto.nombre_proyecto}}</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editar_tarea_accion' tarea.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input id="nombre_tarea" name="nombre_tarea" type="text" value="{{ tarea.nombre_tarea }}" placeholder="{{ tarea.nombre_tarea }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea class="form-control" id="descripcion_tarea" name="descripcion_tarea"
+                        value="{{ tarea.descripcion_tarea }}" placeholder="{{ tarea.descripcion_tarea }}" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_proy" class="col-form-label">Encargado actual: {{ tarea.usuario }}</label>
+                        <select class="form-control" id="usuario" name="usuario" >
+                            {% for participantes in proyecto.participantes.all %}
+                            <option value="{{participantes.id}}">
+                                {{participantes.id}} /
+                                {{participantes.usuario.first_name}}
+                                {{participantes.usuario.last_name}} / {{ participantes.tipo_cargo }}
+                            </option>
+                            {% endfor %}    
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cambiar estado</label>
+                        <select class="form-control" id="estado" name="estado" value="{{tarea.estado}}">
+                            {% if tarea.estado == 'En proceso' %}
+                            <option value="En proceso" selected=''>En proceso</option>
+                            {% else %}
+                            <option value="En proceso" selected=''>En proceso</option>
+                            {% endif %}
+                            {% if tarea.estado == 'Finalizada' %}
+                            <option value="Finalizada" selected=''>Finalizada</option>
+                            {% else %}
+                            <option value="Finalizada" selected=''>Finalizada</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div>
+                        {% if var == 'true' %}
+                        <label for="cotizador" class="col-form-label">Archivo cargado: <a href="{{ tarea.archivo.url }}"
+                                download>{{tarea.archivo.name}} <i
+                                class="fas fa-download"></i> </a></label>
+                        {% else %}
+                        <label>Aún no ha adjuntado archivo</label>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="proyecto" name="proyecto" value="{{proyecto.id}}">
+                    </div>
+                    <div class="form-group">    
+                        <button class="btn btn-block btn-primary" type="submit">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

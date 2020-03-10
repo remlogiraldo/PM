@@ -23,7 +23,7 @@
                             placeholder="Breve descripcion de la tarea" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="tipo_proy" class="col-form-label">Participante</label>
+                        <label for="tipo_proy" class="col-form-label">Ecargado</label>
                         <select class="form-control" id="usuario" name="usuario" value="{{proyecto.tipo_proy}}">
                             {% for participantes in proyecto.participantes.all %}
                             <option value="{{participantes.id}}">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" id="proyecto" name="proyecto" value="{{proyecto.id}}">
-                        <input type="hidden" id="estado" name="estado" value="False">
+                        <input type="hidden" id="estado" name="estado" value="En proceso">
                     </div>
                     <div class="form-group">    
                         <button class="btn btn-block btn-primary" type="submit">Crear</button>

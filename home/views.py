@@ -64,12 +64,28 @@ def proyectos_user(request,id):
     usr2 = usr.id
     proyecto = Proyecto.objects.get(pk=id)
     tarea = Tarea.objects.filter(usuario=usr2)
+    tareas = Tarea.objects.all()
+
+    a = tareas.filter(estado='En proceso').count()
+    b = tareas.filter(estado='Finalizada').count()
+    i = a+b
+
+    if i >= 1:
+        progreso_tot = (b/i)*100
+    else:
+        progreso_tot = 0
 
     c = tarea.filter(estado='En proceso').count()
     d = tarea.filter(estado='Finalizada').count()
     e = c+d 
-    progreso = (d/e)*100
-    contexto = {'proyecto': proyecto, 'tarea':tarea, 'progreso': progreso}
+
+    if e >= 1:
+        progreso_ind = (d/e)*100
+    else: 
+        progreso_ind = 0
+
+
+    contexto = {'proyecto': proyecto, 'tarea':tarea, 'progreso_ind': progreso_ind, 'progreso_tot': progreso_tot}
     # Crea el contexto
     return render(request, 'home/Pages/proyecto_user.html', contexto)
 
@@ -115,6 +131,9 @@ def act_tarea_accion(request, id):
  
     tarea.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+
 
 #Admin views
 @login_required(login_url='login')
@@ -190,8 +209,8 @@ def editar_usuario_accion(request,id):
     usuario.save()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
-def borrar_usuario_accion(request,id):
-    usuario = User.objects.get(pk=id)
+def eliminar_usuario(request,id):
+    usuario = Usuario.objects.get(pk=id)
     usuario.delete()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
@@ -245,6 +264,11 @@ def crear_proyecto_accion(request):
 
     # Redirecciona a la pagina de talleres
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
+
+def eliminar_proyecto(request,id):
+    proyecto = Proyecto.objects.get(pk=id)
+    proyecto.delete()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 @login_required(login_url='login')
 def editar_proyecto(request, id):
@@ -350,6 +374,60 @@ def crear_tarea_accion(request):
 
     tar.save()
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
+
+def editar_tarea(request, id):
+    tarea = Tarea.objects.get(pk=id)
+    proyecto = tarea.proyecto
+    
+    if tarea.archivo.name: var='true'
+    else: var='false'
+
+    contexto = {'tarea': tarea, 'proyecto':proyecto, 'var':var}
+    return render(request, 'home/Pages/editar_tarea.html', contexto)
+    
+def editar_tarea_accion(request,id):
+    valor_nombre_tarea = request.POST.get('nombre_tarea')
+    valor_descripcion_tarea = request.POST['descripcion_tarea']
+    valor_usuario = Usuario.objects.get(id=request.POST['usuario'])
+    valor_proyecto = Proyecto.objects.get(id=request.POST['proyecto'])  
+    valor_estado = request.POST['estado']
+
+    #usr = Usuario.objects.filter(id=valor_usuario)
+    print(valor_usuario)
+    #print(usr)
+    tarea = Tarea.objects.get(pk=id)
+    tarea.nombre_tarea=valor_nombre_tarea
+    tarea.descripcion_tarea=valor_descripcion_tarea
+    tarea.usuario=valor_usuario
+    tarea.estado=valor_estado
+    tarea.proyecto=valor_proyecto
+
+    tarea.save()
+    return HttpResponseRedirect(reverse('visualizar_proyectos'))
+
+def eliminar_tarea(request,id):
+    tarea = Tarea.objects.get(pk=id)
+    tarea.delete()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+def visualizar_tareas(request, id):
+    proyecto = Proyecto.objects.get(pk=id)
+    tareas = Tarea.objects.filter(proyecto=id)
+
+    a = tareas.filter(estado='En proceso').count()
+    b = tareas.filter(estado='Finalizada').count()
+    i = a+b
+
+    if i >= 1:
+        progreso_tot = (b/i)*100
+    else:
+        progreso_tot = 0
+
+    contexto = {'tareas': tareas, 'proyecto':proyecto, 'progreso_tot': progreso_tot}
+    # Crea el contexto
+    return render(request, 'home/Pages/listar_tareas.html', contexto)
+
+
 
 #Error 404 not foud 
 def error_404(request, exception):

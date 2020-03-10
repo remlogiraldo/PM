@@ -16,7 +16,7 @@ urlpatterns = [
     path('admin/visualizar_usuarios/',views.visualizar_usuarios, name='visualizar_usuarios'),
     path('admin/editar_usuario/<int:id>/', views.editar_usuario, name='editar_usuario'),
     path('admin/editar_usuario_accion/<int:id>/editar/?', views.editar_usuario_accion, name='editar_usuario_accion'),
-    path('admin/borrar_usuario_accion/<int:id>/borrar/', views.borrar_usuario_accion, name='borrar_usuario_accion'),
+    path('admin/eliminar_usuario/<int:id>/borrar/', views.eliminar_usuario, name='eliminar_usuario'),
 
     #gestion admin proyectos
     path('admin/crear_proyecto/', views.crear_proyecto, name='crear_proyecto'),
@@ -27,6 +27,10 @@ urlpatterns = [
     path('admin/visualizar_proyectos/<int:id>/',views.proyecto, name='proyecto'),
     path('admin/crear_tarea/<int:id>/', views.crear_tarea, name='crear_tarea'),
     path('admin/crear_tarea_accion/', views.crear_tarea_accion, name='crear_tarea_accion'),
+    path('admin/visualizar_tareas/<int:id>/',views.visualizar_tareas, name='visualizar_tareas'),
+    path('admin/visualizar_tareas/editar_tarea/<int:id>/', views.editar_tarea, name='editar_tarea'),
+    path('admin/editar_tarea_accion/<int:id>/editar/?', views.editar_tarea_accion, name='editar_tarea_accion'),
+    path('admin/eliminar_proyecto/<int:id>/borrar/', views.eliminar_proyecto, name='eliminar_proyecto'),
 
 
     #interfaz usuarios
@@ -36,6 +40,7 @@ urlpatterns = [
     path('usuario/cambiar_pass_accion/',views.cambiar_pass_accion, name='cambiar_pass_accion'),
     path('usuario/actualizar_tareas_user/<int:id>/',views.actualizar_tareas_user, name='actualizar_tareas_user'),
     path('usuario/act_tarea_accion/<int:id>/act/?',views.act_tarea_accion, name='act_tarea_accion'),
+    path('usuario/eliminar_tarea/<int:id>/borrar/', views.eliminar_tarea, name='eliminar_tarea'),
 
 
     path('prueba/', views.prueba, name='prueba'),

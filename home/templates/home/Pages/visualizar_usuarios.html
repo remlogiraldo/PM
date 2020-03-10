@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Proyectos </h2>
+            <h2 class="pageheader-title">Usuarios </h2>
         </div>
     </div>
 </div>
@@ -35,17 +35,40 @@
                         <tbody>
                             {% for usuario in usuarios %}
                             <tr>
-                                <td>{{ usuario.usuario.id }}</td>
+                                <td>{{ usuario.id }}</td>
                                 <td>{{ usuario.usuario.first_name }} {{ usuario.usuario.last_name }} /
                                     {{ usuario.tipo_cargo}} </td>
                                 <td>{{ usuario.usuario.email }}</td>
                                 <td>
                                     <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-primary btn-xs"><i
-                                            class="fas fa-edit"></i></a>
-                                    <a href="#Eliminar" data-toggle="modal"
-                                        class="btn btn-danger btn-xs"><i class="fas fa-eraser"></i></a>
+                                            class="fas fa-edit"></i> Editar</a>
+                                    <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"><i
+                                            class="fas fa-eraser"></i> Eliminar</a>
                                 </td>
                             </tr>
+
+                            <!-- Modal Eliminar-->
+                            <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="eliminar">Salir</h5>
+                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </a>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>¿Esta seguro que desea eliminar el usuario del sistema?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                                            <a href="{% url 'eliminar_usuario' usuario.id %}"
+                                                class="btn btn-primary">Aceptar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -53,27 +76,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Eliminar-->
-    <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eliminar">Salir</h5>
-                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <p>¿Esta seguro que desea eliminar el usuario del sistema?</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
-                    <a href="" class="btn btn-primary">Aceptar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- ============================================================== -->
     <!-- end custom content list  -->
     <!-- ============================================================== -->

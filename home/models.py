@@ -40,7 +40,7 @@ class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.usuario.first_name)
+        return str(self.usuario.first_name) + " " +  (self.usuario.last_name)
 
     class Meta:
         app_label = 'home'

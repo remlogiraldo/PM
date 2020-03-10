@@ -161,6 +161,7 @@
                             <th>Cotizador costos</th>
                             <th>Documento oferta técnica y económica</th>
                             <th>Progreso tareas</th>
+                            <th>Progreso general</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -170,11 +171,14 @@
                                     class="fas fa-download"></i></a>
                             </td>
                             <td>
-                                <a href="{{ proyecto.documento.url }}" download>Descargar<i
+                                <a href="{{ proyecto.documento.url }}" download>Descargar <i
                                     class="fas fa-download"></i></a>
                             </td>
                             <td>
-                                <label>{{ progreso }} </label>
+                                <label>{{ progreso_ind|floatformat:2 }} %</label>
+                            </td>
+                            <td>
+                                <label>{{ progreso_tot|floatformat:2 }} %</label>
                             </td>
                         </tr>
                     </tbody>
