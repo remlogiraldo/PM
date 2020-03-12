@@ -1,5 +1,6 @@
 {% extends 'home/pages/base.html' %}    
 {% load static %}
+{% load humanize %}
 {% block content %}
         <!-- ============================================================== -->
         <!-- pageheader -->
@@ -73,16 +74,16 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        {{proyecto.costo_mensual}}
+                                        {{proyecto.costo_mensual|intcomma}}
                                     </td>
                                     <td>
-                                        {{proyecto.margen}}%
+                                        {{proyecto.margen|floatformat:0}} %
                                     </td>
                                     <td>
                                         {{proyecto.moneda}}
                                     </td>
                                     <td>
-                                        {{proyecto.trm}}
+                                        {{proyecto.trm|intcomma}}
                                     </td>
                                     <td>
                                         {{proyecto.facturacion}}
@@ -101,13 +102,13 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        {{proyecto.costo_implementacion}}
+                                        {{proyecto.costo_implementacion|intcomma}}
                                     </td>
                                     <td>
                                         {{proyecto.costo_imp_diferido}}
                                     </td>
                                     <td>
-                                        {{proyecto.penal}}%
+                                        {{proyecto.penal|floatformat:0}} %
                                     </td>
                                 </tr>
                             </tbody>
@@ -160,15 +161,21 @@
                                 <tr>
                                     <th>Cotizador costos</th>
                                     <th>Documento oferta técnica y económica</th>
+                                    <th>Progreso tareas</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <a href="{{ proyecto.cotizador.url }}" download>Cotizador</a>
+                                        <a href="{{ proyecto.cotizador.url }}" download>Descargar <i
+                                            class="fas fa-download"></i></a></a>
                                     </td>
                                     <td>
-                                        <a href="{{ proyecto.documento.url }}" download>Documento</a>
+                                        <a href="{{ proyecto.documento.url }}" download>Descargar <i
+                                            class="fas fa-download"></i></a></a>
+                                    </td>
+                                    <td>
+                                        <label>{{progreso_tot|floatformat:2}} %</label>
                                     </td>
                                 </tr>
                             </tbody>

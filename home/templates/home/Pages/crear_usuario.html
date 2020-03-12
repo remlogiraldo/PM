@@ -19,12 +19,6 @@
             <div class="card-body">
                 <form action="{% url 'crear_usuario_accion' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="control-group">
-                        <label class="control-label">Imagen: </label>
-                        <div class="controls">
-                          <input type="file" accept="image/*" name="image" id="image">
-                        </div>
-                      </div>
                     <div class="form-group">
                         <label class="col-form-label">Nombre de usuario</label>
                         <input id="username" name="username" type="text" placeholder="nombre.apellido" class="form-control">

@@ -1,5 +1,6 @@
 {% extends 'home/pages/base_user.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 <!-- ============================================================== -->
 <!-- pageheader -->
@@ -73,16 +74,16 @@
                     <tbody>
                         <tr>
                             <td>
-                                {{proyecto.costo_mensual}}
+                                {{proyecto.costo_mensual|intcomma}}
                             </td>
                             <td>
-                                {{proyecto.margen}}%
+                                {{proyecto.margen|floatformat:0}} %
                             </td>
                             <td>
                                 {{proyecto.moneda}}
                             </td>
                             <td>
-                                {{proyecto.trm}}
+                                {{proyecto.trm|intcomma}}
                             </td>
                             <td>
                                 {{proyecto.facturacion}}
@@ -101,13 +102,13 @@
                     <tbody>
                         <tr>
                             <td>
-                                {{proyecto.costo_implementacion}}
+                                {{proyecto.costo_implementacion|intcomma}}
                             </td>
                             <td>
                                 {{proyecto.costo_imp_diferido}}
                             </td>
                             <td>
-                                {{proyecto.penal}}%
+                                {{proyecto.penal|floatformat:0}} %
                             </td>
                         </tr>
                     </tbody>
@@ -161,7 +162,7 @@
                             <th>Cotizador costos</th>
                             <th>Documento oferta técnica y económica</th>
                             <th>Progreso tareas</th>
-                            <th>Progreso general</th>
+                            <th>Progreso tareas general</th>
                         </tr>
                     </thead>
                     <tbody>
