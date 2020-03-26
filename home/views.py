@@ -6,6 +6,7 @@ from .models import Usuario, Proyecto, Tarea
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.views.defaults import page_not_found
 
 # index
@@ -131,14 +132,14 @@ def act_tarea_accion(request, id):
 
 
 #Admin views
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_usuario(request):
     usuarios = Usuario.objects.all()
 
     contexto = {'usuarios': usuarios}
     return render(request, 'home/Pages/crear_usuario.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_usuario_accion(request):
     username = request.POST['username']
     valor_firstname = request.POST['firstName']
@@ -169,21 +170,21 @@ def crear_usuario_accion(request):
     parti.save()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def visualizar_usuarios(request):
     usuarios = Usuario.objects.all()
 
     contexto = {'usuarios':usuarios}
     return render(request, 'home/Pages/visualizar_usuarios.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def editar_usuario(request, id):
     usuario = Usuario.objects.get(pk=id)
 
     contexto = {'usuario': usuario }
     return render(request, 'home/Pages/editar_usuario.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def editar_usuario_accion(request,id):
     username = request.POST['username']
     valor_firstname = request.POST['firstName']
@@ -202,20 +203,20 @@ def editar_usuario_accion(request,id):
     usuario.save()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def eliminar_usuario(request,id):
     usuario = Usuario.objects.get(pk=id)
     usuario.delete()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_proyecto(request):
     usuarios = Usuario.objects.all()
 
     contexto = {'usuarios': usuarios}
     return render(request, 'home/Pages/crear_proyecto.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_proyecto_accion(request):
     valor_nombre = request.POST['nombre']
     valor_descripcion = request.POST['descripcion']
@@ -252,13 +253,13 @@ def crear_proyecto_accion(request):
  
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def eliminar_proyecto(request,id):
     proyecto = Proyecto.objects.get(pk=id)
     proyecto.delete()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def editar_proyecto(request, id):
 
     usuarios = Usuario.objects.all()
@@ -267,7 +268,7 @@ def editar_proyecto(request, id):
     contexto = {'usuarios': usuarios, 'proyecto': proyecto }
     return render(request, 'home/Pages/editar_proyecto.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def editar_proyecto_accion(request,id):
     valor_nombre = request.POST['nombre']
     valor_descripcion = request.POST['descripcion']
@@ -323,7 +324,7 @@ def editar_proyecto_accion(request,id):
     proyecto.save()
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def visualizar_proyectos(request):
     proyectos = Proyecto.objects.all()
     usuarios = Usuario.objects.all()
@@ -331,7 +332,7 @@ def visualizar_proyectos(request):
     contexto = {'proyectos': proyectos, 'participantes':usuarios}
     return render(request, 'home/Pages/visualizar_proyectos.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def proyecto(request,id):
     proyecto = Proyecto.objects.get(pk=id)
     tareas = Tarea.objects.all()
@@ -348,13 +349,13 @@ def proyecto(request,id):
     contexto = {'proyecto': proyecto, 'progreso_tot':progreso_tot}
     return render(request, 'home/Pages/proyecto.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_tarea(request,id):
     proyecto = Proyecto.objects.get(pk=id)
     contexto = {'proyecto': proyecto}
     return render(request, 'home/Pages/crear_tarea.html', contexto)
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def crear_tarea_accion(request):
     valor_nombre_tarea = request.POST.get('nombre_tarea')
     valor_descripcion_tarea = request.POST['descripcion_tarea']
@@ -369,7 +370,7 @@ def crear_tarea_accion(request):
     tar.save()
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def editar_tarea(request, id):
     tarea = Tarea.objects.get(pk=id)
     proyecto = tarea.proyecto
@@ -380,7 +381,7 @@ def editar_tarea(request, id):
     contexto = {'tarea': tarea, 'proyecto':proyecto, 'var':var}
     return render(request, 'home/Pages/editar_tarea.html', contexto)
 
-@login_required(login_url='login')    
+@staff_member_required(login_url='login')    
 def editar_tarea_accion(request,id):
     valor_nombre_tarea = request.POST.get('nombre_tarea')
     valor_descripcion_tarea = request.POST['descripcion_tarea']
@@ -399,13 +400,13 @@ def editar_tarea_accion(request,id):
     tarea.save()
     return HttpResponseRedirect(reverse('visualizar_proyectos'))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def eliminar_tarea(request,id):
     tarea = Tarea.objects.get(pk=id)
     tarea.delete()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
-@login_required(login_url='login')
+@staff_member_required(login_url='login')
 def visualizar_tareas(request, id):
     proyecto = Proyecto.objects.get(pk=id)
     tareas = Tarea.objects.filter(proyecto=id)
