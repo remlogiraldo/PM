@@ -42,9 +42,32 @@
                                             class="far fa-list-alt"></i> Detalles</a>
                                     <a href="{% url 'editar_proyecto' proyecto.id %}" class="btn btn-warning btn-xs"><i
                                             class="fas fa-edit"></i> Editar</a>
-                                    <a href="#" class="btn btn-danger btn-xs" data-target="#ModalEliminar"><i
-                                            class="fas fa-trash"></i> Eliminar</a>
+                                    <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"
+                                        ><i class="fas fa-trash"></i> Eliminar</a>
                                 </td>
+                                <!-- Modal -->
+                                <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="ModalEliminar">Eliminar Proyecto</h5>
+                                                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </a>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Esta seguro que desea eliminar el proyecto del sistema?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                                                <a href="{% url 'eliminar_proyecto' proyecto.id %}"
+                                                    class="btn btn-primary">Aceptar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <td>
                                     <a href="{% url 'crear_tarea' proyecto.id %}" class="btn btn-dark btn-xs"><i
                                             class="fas fa-edit"></i> Crear</a>
@@ -52,27 +75,6 @@
                                             class="fas fa-clipboard-list"></i> Listar</a>
                                 </td>
                             </tr>
-                            <!-- Modal -->
-                            <div class="modal fade" id="#ModalEliminar" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ModalEliminar">Eliminar</h5>
-                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </a>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>¿Esta seguro que desea eliminar el proyecto del sistema?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
-                                            <a href="{% url 'eliminar_proyecto' proyecto.id %}" class="btn btn-primary">Aceptar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             {% endfor %}
                         </tbody>
                     </table>

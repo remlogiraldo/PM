@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.defaults import page_not_found
+from django.contrib import messages
 
 # index
 def index(request):
@@ -29,7 +30,7 @@ def hacer_login(request):
     if user is not None:
         login(request, user)
         if user.is_staff:
-            return HttpResponseRedirect(reverse('crear_proyecto'))
+            return HttpResponseRedirect(reverse('visualizar_proyectos'))
         else:
             return HttpResponseRedirect(reverse('pant_usuario'))
     else:
@@ -96,11 +97,11 @@ def cambiar_pass_accion(request):
     password = request.POST['password']
 
     current_user=request.user.id
-    user = User.objects.filter(id=current_user)
-
-    user.password=password
-    user.password.set()
-    return render(request, 'home/Pages/pant_usuario.html')
+    user = User.objects.get(id=current_user)
+    user.set_password(password)
+    user.save()
+    messages.info(request, '¡Tu contraseña ha sido modificada satisfactoriamente!, por favor ingresa de nuevo')
+    return render(request, 'home/Pages/login.html')
 
 @login_required(login_url='login')
 def actualizar_tareas_user(request, id):
@@ -117,9 +118,6 @@ def act_tarea_accion(request, id):
     valor_estado = request.POST.get('estado')   
     valor_archivo = request.FILES.get('archivo')
     tarea = Tarea.objects.get(pk=id)
-    print(id)
-    print(valor_estado)
-    print(valor_archivo)
     tarea.estado=valor_estado
     
     if request.FILES:
@@ -127,8 +125,7 @@ def act_tarea_accion(request, id):
         tarea.archivo=valor_archivo
  
     tarea.save()
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
+    return HttpResponseRedirect(reverse('pant_usuario'))
 
 
 #Admin views

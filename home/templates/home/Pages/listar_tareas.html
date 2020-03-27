@@ -57,9 +57,31 @@
                             <td>
                                 <a href="{% url 'editar_tarea' tareas.id %}" class="btn btn-primary btn-xs"><i
                                         class="fas fa-edit"></i> Editar</a>
-                                <a href="{% url 'eliminar_tarea' tareas.id %}" class="btn btn-danger btn-xs"><i
-                                        class="fas fa-eraser"></i> Eliminar</a>
+                                <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"
+                                        ><i class="fas fa-trash"></i> Eliminar</a>
                             </td>
+                             <!-- Modal -->
+                             <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                             <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                     <div class="modal-header">
+                                         <h5 class="modal-title" id="ModalEliminar">Eliminar Tarea</h5>
+                                         <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                         </a>
+                                     </div>
+                                     <div class="modal-body">
+                                         <p>¿Esta seguro que desea eliminar la tarea del proyecto?</p>
+                                     </div>
+                                     <div class="modal-footer">
+                                         <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                                         <a href="{% url 'eliminar_tarea' tareas.id %}"
+                                             class="btn btn-primary">Aceptar</a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
                         </tr>
                         <h3></h3>
                         {% endfor %}
