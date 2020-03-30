@@ -202,6 +202,11 @@ def editar_usuario_accion(request,id):
 
 @staff_member_required(login_url='login')
 def eliminar_usuario(request,id):
+    #usr = Usuario.objects.get(usuario_id=id)
+    #usr2 = usr.id
+    #print(id)
+    #print(usr)
+    #print(usr2)
     usuario = Usuario.objects.get(pk=id)
     usuario.delete()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))

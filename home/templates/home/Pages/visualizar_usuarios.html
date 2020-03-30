@@ -42,13 +42,12 @@
                                 <td>
                                     <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-primary btn-xs"><i
                                             class="fas fa-edit"></i> Editar</a>
-                                    <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"><i
+                                    <a href="#Eliminar{{ usuario.pk }}" data-toggle="modal" class="btn btn-danger btn-xs"><i
                                             class="fas fa-eraser"></i> Eliminar</a>
                                 </td>
                             </tr>
-
                             <!-- Modal Eliminar-->
-                            <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="Eliminar{{ usuario.pk }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -59,16 +58,18 @@
                                             </a>
                                         </div>
                                         <div class="modal-body">
-                                            <p>¿Esta seguro que desea eliminar el usuario del sistema?</p>
+                                            <p>¿Esta seguro que desea eliminar el usuario {{usuario.usuario.first_name}} {{usuario.usuario.last_name}} del
+                                                sistema?</p>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
-                                            <a href="{% url 'eliminar_usuario' usuario.id %}"
+                                            <a href="{% url 'eliminar_usuario' usuario.pk %}"
                                                 class="btn btn-primary">Aceptar</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Modal Eliminar-->
                             {% endfor %}
                         </tbody>
                     </table>
@@ -76,9 +77,9 @@
             </div>
         </div>
     </div>
-
     <!-- ============================================================== -->
     <!-- end custom content list  -->
     <!-- ============================================================== -->
 </div>
+
 {% endblock %}

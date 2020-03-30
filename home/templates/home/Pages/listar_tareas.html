@@ -57,11 +57,11 @@
                             <td>
                                 <a href="{% url 'editar_tarea' tareas.id %}" class="btn btn-primary btn-xs"><i
                                         class="fas fa-edit"></i> Editar</a>
-                                <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"
+                                <a href="#Eliminar{{ tareas.pk }}" data-toggle="modal" class="btn btn-danger btn-xs"
                                         ><i class="fas fa-trash"></i> Eliminar</a>
                             </td>
                              <!-- Modal -->
-                             <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                             <div class="modal fade" id="Eliminar{{ tareas.pk }}" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                              <div class="modal-dialog" role="document">
                                  <div class="modal-content">
@@ -72,11 +72,11 @@
                                          </a>
                                      </div>
                                      <div class="modal-body">
-                                         <p>¿Esta seguro que desea eliminar la tarea del proyecto?</p>
+                                         <p>¿Esta seguro que desea eliminar la tarea "{{tareas.nombre_tarea}}" del proyecto?</p>
                                      </div>
                                      <div class="modal-footer">
                                          <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
-                                         <a href="{% url 'eliminar_tarea' tareas.id %}"
+                                         <a href="{% url 'eliminar_tarea' tareas.pk %}"
                                              class="btn btn-primary">Aceptar</a>
                                      </div>
                                  </div>

@@ -15,16 +15,16 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nombre" class="col-form-label">Nombre</label>
-                        <input id="nombre_tarea" name="nombre_tarea" type="text" placeholder="Nombre de tarea" class="form-control">
+                        <input id="nombre_tarea" name="nombre_tarea" type="text" placeholder="Nombre de tarea" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
                         <textarea class="form-control" id="descripcion_tarea" name="descripcion_tarea"
-                            placeholder="Breve descripcion de la tarea" rows="3"></textarea>
+                            placeholder="Breve descripcion de la tarea" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="tipo_proy" class="col-form-label">Ecargado</label>
-                        <select class="form-control" id="usuario" name="usuario" value="{{proyecto.tipo_proy}}">
+                        <select class="form-control" id="usuario" name="usuario" value="{{proyecto.tipo_proy}}" required>
                             {% for participantes in proyecto.participantes.all %}
                             <option value="{{participantes.id}}">
                                 {{participantes.id}} /

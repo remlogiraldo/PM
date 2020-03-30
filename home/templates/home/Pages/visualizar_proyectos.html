@@ -42,11 +42,11 @@
                                             class="far fa-list-alt"></i> Detalles</a>
                                     <a href="{% url 'editar_proyecto' proyecto.id %}" class="btn btn-warning btn-xs"><i
                                             class="fas fa-edit"></i> Editar</a>
-                                    <a href="#Eliminar" data-toggle="modal" class="btn btn-danger btn-xs"
+                                    <a href="#Eliminar{{ proyecto.pk }}" data-toggle="modal" class="btn btn-danger btn-xs"
                                         ><i class="fas fa-trash"></i> Eliminar</a>
                                 </td>
                                 <!-- Modal -->
-                                <div class="modal fade" id="Eliminar" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="Eliminar{{ proyecto.pk }}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -57,7 +57,7 @@
                                                 </a>
                                             </div>
                                             <div class="modal-body">
-                                                <p>¿Esta seguro que desea eliminar el proyecto del sistema?</p>
+                                                <p>¿Esta seguro que desea eliminar el proyecto "{{proyecto.nombre_proyecto}}" del sistema?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>

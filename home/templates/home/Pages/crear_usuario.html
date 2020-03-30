@@ -21,23 +21,23 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="col-form-label">Nombre de usuario</label>
-                        <input id="username" name="username" type="text" placeholder="nombre.apellido" class="form-control">
+                        <input id="username" name="username" type="text" placeholder="nombre.apellido" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Nombre</label>
-                        <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control">
+                        <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Apellido</label>
-                        <input id="lastN" name="lastN" type="text" placeholder="Apellido" class="form-control">
+                        <input id="lastN" name="lastN" type="text" placeholder="Apellido" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Correo Electrónico</label>
-                        <input id="email" name="email" type="email" placeholder="name@example.com" class="form-control">
+                        <input id="email" name="email" type="email" placeholder="name@example.com" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Contraseña</label>
-                        <input id="password" name="password" type="password" placeholder="" class="form-control">
+                        <input id="password" name="password" type="password" placeholder="" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="tipo_cargo" class="col-form-label">Cargo: {{usuario.tipo_cargo}}</label>

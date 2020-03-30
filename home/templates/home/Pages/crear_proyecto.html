@@ -16,12 +16,12 @@
                     <div class="form-group">
                         <label for="nombre" class="col-form-label">Nombre</label>
                         <input id="nombre" name="nombre" type="text" placeholder="Nombre de proyecto"
-                            class="form-control">
+                            class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
                         <textarea class="form-control" id="descripcion" name="descripcion"
-                            placeholder="Breve descripcion del proyecto" rows="3"></textarea>
+                            placeholder="Breve descripcion del proyecto" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="participantes" class="col-form-label">Participantes (seleccione los participantes
@@ -29,7 +29,7 @@
                         <br>
                         <h7>----ID----/----Nombre----/----Cargo----</h7>
                         </br>
-                        <select class="form-control" id="participantes" name="participantes" multiple>
+                        <select class="form-control" id="participantes" name="participantes" required multiple>
                             {% for participantes in usuarios.all %}
                             <option value="{{participantes.usuario.id}}">
                                 {{participantes.usuario.id}} /
@@ -49,21 +49,21 @@
                     </div>
                     <div class="form-group">
                         <label for="fecha_kick" class="col-form-label">Fecha KickOff</label>
-                        <input id="fecha_kick" name="fecha_kick" type="date" class="form-control">
+                        <input id="fecha_kick" name="fecha_kick" type="date" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="fecha_inicio class=" col-form-label">Fecha Inicio</label>
-                        <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control">
+                        <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="costo_mensual" class="col-form-label">Costo mensual</label>
                         <input id="costo_mensual" name="costo_mensual" type="number"
-                            placeholder="Número sin punto ni coma" class="form-control">
+                            placeholder="Número sin punto ni coma" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="margen" class="col-form-label">Margen</label>
                         <input id="margen" name="margen" type="number" placeholder="Número sin punto ni coma"
-                            class="form-control">
+                            class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="ans" class="col-form-label">Disponibilidad según ANS</label>
@@ -83,13 +83,13 @@
                     <div class="form-group">
                         <label for="trm" class="col-form-label">TRM</label>
                         <input id="trm" name="trm" type="number" placeholder="Número sin punto ni coma"
-                            class="form-control">
+                            class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="costo_implementacion" class="col-form-label">Costo de
                             implementación</label>
                         <input id="costo_implementacion" name="costo_implementacion" type="number"
-                            placeholder="Número sin punto ni coma" class="form-control">
+                            placeholder="Número sin punto ni coma" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="incremento" class="col-form-label">Incremento anual</label>
@@ -117,27 +117,27 @@
                         <label for="penal" class="col-form-label">Porcentaje de penalización sobre
                             factura
                             mensual</label>
-                        <input id="penal" name="penal" type="number" placeholder="Número sin punto ni coma" class="form-control">
+                        <input id="penal" name="penal" type="number" placeholder="Número sin punto ni coma" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="duracion_total" class="col-form-label">Tiempo duración del
                             contrato</label>
                         <input id="duracion_total" name="duracion_total" type="number" placeholder="Número de meses"
-                            class="form-control">
+                            class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="duracion_implementacion" class="col-form-label">Tiempo de
                             implementación</label>
                         <input id="duracion_implementacion" name="duracion_implementacion" type="number"
-                            placeholder="Número de meses" class="form-control">
+                            placeholder="Número de meses" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="cotizador" class="col-form-label">Cotizador</label>
-                        <input id="cotizador" name="cotizador" type="file" class="form-control">
+                        <input id="cotizador" name="cotizador" type="file" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="documento" class="col-form-label">Documento</label>
-                        <input id="documento" name="documento" type="file" class="form-control">
+                        <input id="documento" name="documento" type="file" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-block btn-primary" type="submit">Crear</button>
