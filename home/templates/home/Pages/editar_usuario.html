@@ -35,22 +35,78 @@
                             value="{{usuario.usuario.email}}" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="tipo_cargo" class="col-form-label">Cargo: {{usuario.tipo_cargo}}</label>
-                        <select class="form-control" id="tipo_cargo" name="tipo_cargo" value={{usuario.tipo_cargo}}>
-                            <option id="PREVENTA">Ingeniero Preventa</option>
-                            <option id="COORDINADOR_PREVENTA">Coordinador Preventa</option>
-                            <option id="OPERADOR_SET">Operador SET</option>
-                            <option id="OPERADOR_GTI">Operador GTI</option>
-                            <option id="ING_CLOUD">Arquitecto Cloud</option>
-                            <option id="ING_ESPECIALISTA">Ingeniero Especialista</option>
-                            <option id="AGENTE">Agente de mesa</option>
-                            <option id="GERENTE">Gerente de proyecto</option>
-                            <option id="CONTADOR">Contador</option>
-                            <option id="ANALISTA">Analista ITIL</option>
-                            <option id="ING_IMP">Ingeniero implementacion</option>
-                            <option id="LIDER_IMP">Lider de implementacion</option>
-                            <option id="LIDER_NOC">Lider NOC</option>
-                            <option id="LIDER_SOC">Lider SOC</option>
+                        <label for="tipo_cargo" class="col-form-label">Cargo</label>
+                        <select class="form-control" id="tipo_cargo" name="tipo_cargo">
+                            {% if usuario.tipo_cargo == 'Ingeniero Preventa' %}
+                            <option value="Ingeniero Preventa" selected=''>Ingeniero Preventa</option>
+                            {% else %}
+                            <option value="Ingeniero Preventa">Ingeniero Preventa</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Coordinador Preventa' %}
+                            <option value="Coordinador Preventa" selected=''>Coordinador Preventa</option>
+                            {% else %}
+                            <option value="Coordinador Preventa">Coordinador Preventa</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Operador SET' %}
+                            <option value="Operador SET" selected=''>Operador SET</option>
+                            {% else %}
+                            <option value="Operador SET">Operador SET</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Operador GTI' %}
+                            <option value="Operador GTI" selected=''>Operador GTI</option>
+                            {% else %}
+                            <option value="Operador GTI">Operador GTI</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Arquitecto Cloud' %}
+                            <option value="Arquitecto Cloud" selected=''>Arquitecto Cloud</option>
+                            {% else %}
+                            <option value="Arquitecto Cloud">Arquitecto Cloud</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Ingeniero Especialista' %}
+                            <option value="Ingeniero Especialista" selected=''>Ingeniero Especialista</option>
+                            {% else %}
+                            <option value="Ingeniero Especialista">Ingeniero Especialista</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Agente de mesa' %}
+                            <option value="Agente de mesa" selected=''>Agente de mesa</option>
+                            {% else %}
+                            <option value="Agente de mesa">Agente de mesa</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Gerente de proyecto' %}
+                            <option value="Gerente de proyecto" selected=''>Gerente de proyecto</option>
+                            {% else %}
+                            <option value="Gerente de proyecto">Gerente de proyecto</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Contador' %}
+                            <option value="Contador" selected=''>Contador</option>
+                            {% else %}
+                            <option value="Contador">Contador</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Ingeniero implementacion' %}
+                            <option value="Ingeniero implementacion" selected=''>Ingeniero implementacion</option>
+                            {% else %}
+                            <option value="Ingeniero implementacion">Ingeniero implementacion</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Analista ITIL' %}
+                            <option value="Analista ITIL" selected=''>Analista ITIL</option>
+                            {% else %}
+                            <option value="Analista ITIL">Analista ITIL</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Lider de implementacion' %}
+                            <option value="Lider de implementacion" selected=''>Lider de implementacion</option>
+                            {% else %}
+                            <option value="Lider de implementacion">Lider de implementacion</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Lider NOC' %}
+                            <option value="Lider NOC" selected=''>Lider NOC</option>
+                            {% else %}
+                            <option value="Lider NOC">Lider NOC</option>
+                            {% endif %}
+                            {% if usuario.tipo_cargo == 'Lider SOC' %}
+                            <option value="Lider SOC" selected=''>Lider SOC</option>
+                            {% else %}
+                            <option value="Lider SOC">Lider SOC</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">

@@ -42,7 +42,13 @@
                     {% endfor %}
             </ul>
             {% endif %}
-            <div class="card-header text-center"><a href="http://www.aurs.com.co"><img class="logo-img"
+            {% if error %}
+            <ul class="alert alert-primary" role="danger">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <strong>¡ERROR!</strong> {{error}}
+            </ul>
+            {% endif %}
+            <div class="card-header text-center"><a href="http://www.arus.com.co"><img class="logo-img"
                         src="{% static '/assets/images/arus.png'%}" height="103" width="292" alt="logo"></a><span
                     class="splash-description">GESTIÓN DE PROYECTOS</span></div>
             <div class="card-body">

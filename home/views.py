@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import openpyxl 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Usuario, Proyecto, Tarea
@@ -7,8 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.views.defaults import page_not_found
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # index
 def index(request):
@@ -25,19 +25,25 @@ def hacer_login(request):
     password = request.POST['password']
 
     # Obtiene el usuario con los datos de autenticacion
-    user = authenticate(username=username, password=password)
-
-    if user is not None:
-        login(request, user)
-        if user.is_staff:
-            return HttpResponseRedirect(reverse('visualizar_proyectos'))
+    
+    try:
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if user.is_staff:
+                return HttpResponseRedirect(reverse('visualizar_proyectos'))
+            else:
+                return HttpResponseRedirect(reverse('pant_usuario'))
         else:
-            return HttpResponseRedirect(reverse('pant_usuario'))
-    else:
+            contexto = {
+                'error': 'Usuario o contraseña incorrecto'
+            }
+            return render(request, 'home/Pages/login.html', contexto)
+    except Usuario.user.DoesNotExist:
         contexto = {
-            'error': 'Usuario o contraseña incorrectos'
+            'error': 'Usuario no encontrado'
         }
-        return render(request, 'home/Pages/login.html', contexto)  
+        return render(request, 'home/Pages/login.html', contexto)
 
 def hacer_logout(request):
     logout(request)
@@ -146,18 +152,24 @@ def crear_usuario_accion(request):
     cargo = request.POST['tipo_cargo']
     
     usr = User.objects.filter(username=username)
+    correo = User.objects.filter(email=email)
 
     if len(usr) != 0:
         contexto = {
-            'error': 'El username ya está siendo utilizado'
+            'error': 'El nombre de usuario ya está siendo utilizado'
+        }
+        return render(request, 'home/Pages/crear_usuario.html', contexto)
+    elif len(correo) !=0:
+        contexto = {
+            'error': 'El correo electrónico ya está siendo utilizado'
         }
         return render(request, 'home/Pages/crear_usuario.html', contexto)
     else:
         user = User(
-            username=username,
-            first_name=valor_firstname,
-            last_name=valor_lastname,
-            email=email,
+        username=username,
+        first_name=valor_firstname,
+        last_name=valor_lastname,
+        email=email,
         )
     
     user.set_password(password)
@@ -190,23 +202,21 @@ def editar_usuario_accion(request,id):
     cargo = request.POST['tipo_cargo']
 
     usuario = User.objects.get(pk=id)
-    
+    usr = Usuario.objects.get(usuario_id=id)
+
+    print(usr)
     usuario.username=username
     usuario.first_name=valor_firstname
     usuario.last_name=valor_lastname
     usuario.email=email
-    usuario.usuario.tipo_cargo=cargo
+    usr.tipo_cargo=cargo
 
     usuario.save()
+    usr.save()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
 
 @staff_member_required(login_url='login')
 def eliminar_usuario(request,id):
-    #usr = Usuario.objects.get(usuario_id=id)
-    #usr2 = usr.id
-    #print(id)
-    #print(usr)
-    #print(usr2)
     usuario = Usuario.objects.get(pk=id)
     usuario.delete()
     return HttpResponseRedirect(reverse('visualizar_usuarios'))
@@ -424,16 +434,6 @@ def visualizar_tareas(request, id):
 
     contexto = {'tareas': tareas, 'proyecto':proyecto, 'progreso_tot': progreso_tot}
     return render(request, 'home/Pages/listar_tareas.html', contexto)
-
-
-
-#Error 404 not foud 
-def error_404(request, exception):
-    response = render_to_response('404.html',context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
-
 
 
 def prueba(request):

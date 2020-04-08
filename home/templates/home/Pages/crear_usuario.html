@@ -11,10 +11,10 @@
         </div>
         <div class="card">
             {% if error %}
-            <div class="alert alert-error">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>ERROR! </strong> {{error}}
-            </div>
+            <ul class="alert alert-primary" role="danger">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <strong>¡ERROR!</strong> {{error}}
+            </ul>
             {% endif %}
             <div class="card-body">
                 <form action="{% url 'crear_usuario_accion' %}" method="POST" enctype="multipart/form-data">

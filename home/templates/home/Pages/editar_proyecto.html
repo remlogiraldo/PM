@@ -11,7 +11,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="{% url 'editar_proyecto_accion' proyecto.id%}" method="POST"
+                <form action="{% url 'editar_proyecto_accion' proyecto.id %}" method="POST"
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
@@ -21,8 +21,8 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
-                        <textarea class="form-control" id="descripcion" placeholder="{{proyecto.descripcion}}"
-                            value="{{proyecto.descripcion}}" name="descripcion" rows="3"></textarea>
+                        <input id="descripcion" name="descripcion" type="text" class="form-control"
+                            value="{{ proyecto.descripcion }}" maxlength="50">
                     </div>
                     <div class="form-group">
                         <ul class="list-unstyled arrow">
@@ -53,10 +53,22 @@
                     </div>
                     <div class="form-group">
                         <label for="tipo_proy" class="col-form-label">Línea</label>
-                        <select class="form-control" id="tipo_proy" name="tipo_proy" value="{{proyecto.tipo_proy}}">
-                            <option id="GTI">GTI</option>
-                            <option id="SET">SET</option>
-                            <option id="CLOUD">CLOUD</option>
+                        <select class="form-control" id="tipo_proy" name="tipo_proy">
+                            {% if proyecto.tipo_proy == 'GTI' %}
+                            <option value="GTI" selected=''>GTI</option>
+                            {% else %}
+                            <option value="GTI">GTI</option>
+                            {% endif %}
+                            {% if proyecto.tipo_proy == 'SET' %}
+                            <option value="SET" selected=''>SET</option>
+                            {% else %}
+                            <option value="SET">SET</option>
+                            {% endif %}
+                            {% if proyecto.tipo_proy == 'CLOUD' %}
+                            <option value="CLOUD" selected=''>CLOUD</option>
+                            {% else %}
+                            <option value="CLOUD">CLOUD</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
@@ -81,17 +93,37 @@
                     </div>
                     <div class="form-group">
                         <label for="ans" class="col-form-label">Disponibilidad según ANS</label>
-                        <select class="form-control" id="ans" name="ans" value="{{proyecto.ans}}">
-                            <option id="95">95</option>
-                            <option id="97">97</option>
-                            <option id="99">99</option>
+                        <select class="form-control" id="ans" name="ans">
+                            {% if proyecto.ans == '95' %}
+                            <option value="95" selected=''>95</option>
+                            {% else %}
+                            <option value="95">95</option>
+                            {% endif %}
+                            {% if proyecto.ans == '97' %}
+                            <option value="97" selected=''>97</option>
+                            {% else %}
+                            <option value="97">97</option>
+                            {% endif %}
+                            {% if proyecto.ans == '99' %}
+                            <option value="99" selected=''>99</option>
+                            {% else %}
+                            <option value="99">99</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="moneda" class="col-form-label">Moneda</label>
-                        <select class="form-control" id="moneda" name="moneda" value="{{proyecto.moneda}}">
-                            <option id="COP">COP</option>
-                            <option id="USD">USD</option>
+                        <select class="form-control" id="moneda" name="moneda">
+                            {% if proyecto.moneda == 'COP' %}
+                            <option value="COP" selected=''>COP</option>
+                            {% else %}
+                            <option value="COP">COP</option>
+                            {% endif %}
+                            {% if proyecto.moneda == 'USD' %}
+                            <option value="USD" selected=''>USD</option>
+                            {% else %}
+                            <option value="USD">USD</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
@@ -108,26 +140,48 @@
                     </div>
                     <div class="form-group">
                         <label for="incremento" class="col-form-label">Incremento anual</label>
-                        <select class="form-control" id="incremento" name="incremento" value="{{proyecto.incremento}}">
-                            <option id="IPC">IPC</option>
-                            <option id="SMLV">SMLV</option>
+                        <select class="form-control" id="incremento" name="incremento">
+                            {% if proyecto.incremento == 'IPC' %}
+                            <option value="IPC" selected=''>IPC</option>
+                            {% else %}
+                            <option value="IPC">IPC</option>
+                            {% endif %}
+                            {% if proyecto.incremento == 'SMLV' %}
+                            <option value="SMLV" selected=''>SMLV</option>
+                            {% else %}
+                            <option value="SMLV">SMLV</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="costo_imp_diferido" class="col-form-label">¿Costos de implementación
                             diferidos?</label>
-                        <select class="form-control" id="costo_imp_diferido" name="costo_imp_diferido"
-                            value="{{proyecto.costo_imp_diferido}}">
-                            <option id="SI">Si</option>
-                            <option id="NO">No</option>
+                        <select class="form-control" id="costo_imp_diferido" name="costo_imp_diferido">
+                            {% if proyecto.costo_imp_diferido == 'SI' %}
+                            <option value="SI" selected=''>Si</option>
+                            {% else %}
+                            <option value="SI">Si</option>
+                            {% endif %}
+                            {% if proyecto.costo_imp_diferido == 'NO' %}
+                            <option value="NO" selected=''>No</option>
+                            {% else %}
+                            <option value="NO">No</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="facturacion" class="col-form-label">Facturacion</label>
-                        <select class="form-control" id="facturacion" name="facturacion"
-                            value="{{proyecto.facturacion}}">
-                            <option id="MES_VENCIDO">Mes vencido</option>
-                            <option id="MES_CORRIENTE">Mes corriente</option>
+                        <select class="form-control" id="facturacion" name="facturacion">
+                            {% if proyecto.facturacion == 'MES_VENCIDO' %}
+                            <option value="MES_VENCIDO" selected=''>Mes vencido</option>
+                            {% else %}
+                            <option value="MES_VENCIDO">Mes vencido</option>
+                            {% endif %}
+                            {% if proyecto.facturacion == 'MES_CORRIENTE' %}
+                            <option value="MES_CORRIENTE" selected=''>Mes corriente</option>
+                            {% else %}
+                            <option value="MES_CORRIENTE">Mes corriente</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-group">

@@ -1,10 +1,12 @@
 from django.urls import path
-from django.conf.urls import url, handler404
-from home.views import error_404
+from django.conf import settings
+from django.conf.urls import url
 from . import views
 
-handler404 = 'home.views.error_404'
+#las vistas creadas
+
 urlpatterns = [
+
     path('',views.index, name='index'),
     path('login/', views.loginPage, name='login'),
     path('hacer_login/?', views.hacer_login, name='hacer_login'),

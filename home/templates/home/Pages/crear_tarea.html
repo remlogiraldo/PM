@@ -20,10 +20,13 @@
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
                         <textarea class="form-control" id="descripcion_tarea" name="descripcion_tarea"
-                            placeholder="Breve descripcion de la tarea" rows="3" required></textarea>
+                            placeholder="Breve descripcion de la tarea" rows="2" maxlength="100" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="tipo_proy" class="col-form-label">Ecargado</label>
+                        <br>
+                        <h7>----ID----/----Nombre----/----Cargo----</h7>
+                        </br>
                         <select class="form-control" id="usuario" name="usuario" value="{{proyecto.tipo_proy}}" required>
                             {% for participantes in proyecto.participantes.all %}
                             <option value="{{participantes.id}}">
